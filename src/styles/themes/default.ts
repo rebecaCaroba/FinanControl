@@ -12,7 +12,7 @@ export const defaultTheme = {
     
     'background': '#202024',
 
-    'green-300': '#00d37e',
+    'green-300': '#00b37e',
     'green-500': '#00875f',
     'green-700': '#015f43',
 
