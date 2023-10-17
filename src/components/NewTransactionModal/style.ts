@@ -15,7 +15,7 @@ export const Content = styled(Dialog.Content)`
     min-width: 32rem;
     border-radius: 6px;
     padding: 2.5rem 3rem;
-    background: ${props => props.theme['gray-700']};
+    background: ${props => props.theme['background']};
 
     position: fixed;
     top: 50%;
@@ -69,5 +69,35 @@ export const CloseButton = styled(Dialog.Close)`
     background: transparent;
     color:  ${props => props.theme['gray-500']};
     cursor: pointer;
+
+`
+
+export const TransactionType = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+`
+
+interface TransactionTypeButtonProps {
+    variant: 'income' | 'outcome'
+}
+
+export const TransactionTypeButton = styled.div<TransactionTypeButtonProps>`
+    background-color:  ${props => props.theme['gray-700']};
+    color:  ${props => props.theme['gray-300']};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 0;
+
+    svg {
+        color: ${(props) => props.variant === 'income'? props.theme['green-300']: props.theme['red-300']  };
+    }
 
 `
