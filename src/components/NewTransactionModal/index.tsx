@@ -18,12 +18,12 @@ export function NewTransactionModal() {
                     <input type="text" placeholder='Preço' required/>
                     <input type="text" placeholder='Caategoria' required/>
                     <TransactionType>
-                        <TransactionTypeButton variant='income'>
-                            <BsArrowUpCircle color='#00B37E' size={24} />
+                        <TransactionTypeButton variant='income' value='income'>
+                            <BsArrowUpCircle size={24} />
                             Entrada
                         </TransactionTypeButton>
-                        <TransactionTypeButton variant='outcome'>
-                            <BsArrowDownCircle color='#F75A68' size={24} />
+                        <TransactionTypeButton variant='outcome' value='outcome'>
+                            <BsArrowDownCircle size={24} />
                             Saída
                         </TransactionTypeButton>
                     </TransactionType>
