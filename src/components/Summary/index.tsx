@@ -3,6 +3,7 @@ import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs'
 import { MdAttachMoney } from 'react-icons/md'
 import { TransactionsContext } from "../../contexts/TransactionsContext";
 import { useContext } from 'react'
+import { priceFormatter } from "../../utils/formatter";
 
 export function Summary(){
     const { transactions } = useContext(TransactionsContext)
@@ -29,21 +30,21 @@ export function Summary(){
                     <span>Entradas</span>
                     <BsArrowUpCircle color='#00B37E' size={24} />
                 </header>
-                <strong>R$ {summary.income}</strong>
+                <strong>{priceFormatter.format(summary.income)}</strong>
             </SummaryCard>
             <SummaryCard>
                 <header>
                     <span>Saídas</span>
                     <BsArrowDownCircle color='#F75A68' size={24} />
                 </header>
-                <strong>R$ {summary.outcome}</strong>
+                <strong>{priceFormatter.format(summary.outcome)}</strong>
             </SummaryCard>
             <SummaryCard variany="green">
                 <header>
                     <span>Total</span>
                     <MdAttachMoney color='#fff' size={24}  />
                 </header>
-                <strong>R$ {summary.total}</strong>
+                <strong>{priceFormatter.format(summary.total)}</strong>
             </SummaryCard>
         </SummaryContainer>
     )
