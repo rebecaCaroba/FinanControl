@@ -1,8 +1,13 @@
 import { SummaryCard, SummaryContainer } from "./style";
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs'
 import { MdAttachMoney } from 'react-icons/md'
+import { TransactionsContext } from "../../contexts/TransactionsContext";
+import { useContext } from 'react'
 
 export function Summary(){
+    const { transactions } = useContext(TransactionsContext)
+    console.log(transactions)
+
     return (
         <SummaryContainer>
             <SummaryCard>

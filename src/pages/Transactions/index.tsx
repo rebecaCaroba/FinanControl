@@ -1,32 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Header } from "../../components/Header";
 import { SearchForm } from "../../components/SearchForm";
 import { Summary } from "../../components/Summary";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./style";
-
-interface TransactionsProps {
-    id: number,
-    description: string,
-    type: 'income' | 'outcome',
-    category: 'string',
-    price: number,
-    createdAd: string
-}
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 
 export function Transactions() {
-    const [transactions, setTransactions] = useState<TransactionsProps[]>([])
-
-    async function PegarDado() {
-        const response = await fetch('http://localhost:3333/Transactions')
-        const data = await response.json()
-
-        setTransactions(data)
-    }
-
-    useEffect(() => {
-        PegarDado()
-    }, [])
-
+    const { transactions } = useContext(TransactionsContext)
     return (
         <div>
             <Header />
