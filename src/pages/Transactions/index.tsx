@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { SearchForm } from "../../components/SearchForm";
 import { Summary } from "../../components/Summary";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./style";
 
+interface TransactionsProps {
+    id: number,
+    description: string,
+    type: 'income' | 'outcome',
+    category: 'string',
+    price: number,
+    createdAd: string
+}
+
 export function Transactions() {
+    const [transactions, setTransactions] = useState<TransactionsProps[]>([])
+
+    async function PegarDado() {
+        const response = await fetch('http://localhost:3333/Transactions')
+        const data = await response.json()
+
+        setTransactions(data)
+    }
+
+    useEffect(() => {
+        PegarDado()
+    }, [])
+
     return (
         <div>
             <Header />
@@ -12,22 +35,20 @@ export function Transactions() {
             <TransactionsContainer>
             <SearchForm />
                 <TransactionsTable>
-                        <div>
-                            <span>Desenvolvimento de site</span>
+                    {transactions.map(transaction => {
+                        return (
+                        <div key={transaction.id}>
+                            <span>{transaction.description}</span>
                             <span>
-                                <PriceHighLight varient="income">R$ 12.000,00</PriceHighLight>
+                                <PriceHighLight varient={transaction.type}>
+                                    {transaction.price}
+                                </PriceHighLight>
                             </span>
-                            <span>Venda</span>
-                            <span>13/04/2022</span>
+                            <span>{transaction.category}</span>
+                            <span>{(transaction.createdAd)}</span>
                         </div>
-                        <div>
-                            <span>Hamburguer</span>
-                            <span>
-                                <PriceHighLight varient="outcome">- R$ 59,00</PriceHighLight>
-                            </span>
-                            <span>Alimentação</span>
-                            <span>10/04/2022</span>
-                        </div>
+                        )
+                    })}
                 </TransactionsTable>
             </TransactionsContainer>
         </div>
