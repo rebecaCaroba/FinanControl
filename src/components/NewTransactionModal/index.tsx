@@ -6,8 +6,6 @@ import * as z from 'zod'
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
-
 const newTransactionFormSchema = z.object({
     description: z.string(),
     price: z.number(),
