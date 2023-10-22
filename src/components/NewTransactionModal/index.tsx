@@ -11,8 +11,8 @@ import { BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs'
 import * as z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
 import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { useContextSelector } from 'use-context-selector'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -24,7 +24,12 @@ const newTransactionFormSchema = z.object({
 type NewTransactionInputs = z.infer<typeof newTransactionFormSchema>
 
 export function NewTransactionModal() {
-  const { creatTransactions } = useContext(TransactionsContext)
+  const creatTransactions = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.creatTransactions
+    },
+  )
 
   const {
     control,

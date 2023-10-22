@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect, ReactNode } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import { api } from '../lib'
+import { createContext } from 'use-context-selector'
 
 interface TransactionsProps {
   id: number
