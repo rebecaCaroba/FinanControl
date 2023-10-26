@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from 'react'
+import { useState, useEffect, ReactNode, useCallback } from 'react'
 import { api } from '../lib'
 import { createContext } from 'use-context-selector'
 
@@ -33,7 +33,7 @@ export const TransactionsContext = createContext({} as TransactionsContextType)
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<TransactionsProps[]>([])
 
-  async function fetchTransactions(query?: string) {
+  const fetchTransactions = useCallback(async (query?: string) => {
     const response = await api.get('Transactions', {
       params: {
         _sort: 'createdAd',
@@ -43,9 +43,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     })
 
     setTransactions(response.data)
-  }
+  }, [])
 
-  async function creatTransactions(data: TransactionsInput) {
+  const creatTransactions = useCallback(async (data: TransactionsInput) => {
     const { category, description, price, type } = data
 
     const response = await api.post('Transactions', {
@@ -57,11 +57,11 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     })
 
     setTransactions((state) => [response.data, ...state])
-  }
+  }, [])
 
   useEffect(() => {
     fetchTransactions()
-  }, [])
+  }, [fetchTransactions])
 
   return (
     <TransactionsContext.Provider
